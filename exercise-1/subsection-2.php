@@ -7,7 +7,7 @@ error_reporting(E_ALL);
 
 function CalcDiameter($radius): float {
     if (!is_numeric($radius)) throw new Error('Parameter radius must be numeric type!');
-    if ($radius < 0) throw new Error('Parameter radius must be greater than 0!');
+    if ($radius <= 0) throw new Error('Parameter radius must be greater than 0!');
     return 2 * $radius;
 }
 

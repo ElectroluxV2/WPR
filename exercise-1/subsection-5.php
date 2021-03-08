@@ -16,33 +16,33 @@ abstract class ShapeType {
 
 function CalcTriangleSurface($a, $h): float {
     if (!is_numeric($a)) throw new Error('Parameter a must be numeric type!');
-    if ($a < 0) throw new Error('Parameter a must be greater than 0!');
+    if ($a <= 0) throw new Error('Parameter a must be greater than 0!');
 
     if (!is_numeric($h)) throw new Error('Parameter h must be numeric type!');
-    if ($h < 0) throw new Error('Parameter h must be greater than 0!');
+    if ($h <= 0) throw new Error('Parameter h must be greater than 0!');
 
     return ($a * $h) / 2;
 }
 
 function CalcRectangleSurface($a, $b): float {
     if (!is_numeric($a)) throw new Error('Parameter a must be numeric type!');
-    if ($a < 0) throw new Error('Parameter a must be greater than 0!');
+    if ($a <= 0) throw new Error('Parameter a must be greater than 0!');
 
     if (!is_numeric($b)) throw new Error('Parameter b must be numeric type!');
-    if ($b < 0) throw new Error('Parameter b must be greater than 0!');
+    if ($b <= 0) throw new Error('Parameter b must be greater than 0!');
 
     return $a * $b;
 }
 
 function CalcTrapezeSurface($a, $b, $h): float {
     if (!is_numeric($a)) throw new Error('Parameter a must be numeric type!');
-    if ($a < 0) throw new Error('Parameter a must be greater than 0!');
+    if ($a <= 0) throw new Error('Parameter a must be greater than 0!');
 
     if (!is_numeric($b)) throw new Error('Parameter b must be numeric type!');
-    if ($b < 0) throw new Error('Parameter b must be greater than 0!');
+    if ($b <= 0) throw new Error('Parameter b must be greater than 0!');
 
     if (!is_numeric($h)) throw new Error('Parameter h must be numeric type!');
-    if ($h < 0) throw new Error('Parameter h must be greater than 0!');
+    if ($h <= 0) throw new Error('Parameter h must be greater than 0!');
 
     return (($a + $b) * $h) / 2;
 }
