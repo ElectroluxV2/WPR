@@ -40,7 +40,7 @@ function GetMaximumValueDoWhile(&$arrayRef, $arrayLength): int {
     return $max;
 }
 
-function GetMaximumValueForEach(&$arrayRef, $arrayLength): int {
+function GetMaximumValueForEach(&$arrayRef): int {
     $max = PHP_INT_MIN;
     foreach ($arrayRef as $number) {
         $max = $number > $max ? $number : $max;
@@ -60,4 +60,4 @@ $nonStaticArrayLength = count($randomArray);
 echo GetMaximumValueFor($randomArray, $nonStaticArrayLength).'<br>';
 echo GetMaximumValueWhile($randomArray, $nonStaticArrayLength).'<br>';
 echo GetMaximumValueDoWhile($randomArray, $nonStaticArrayLength).'<br>';
-echo GetMaximumValueForEach($randomArray, $nonStaticArrayLength).'<br>';
+echo GetMaximumValueForEach($randomArray).'<br>';
