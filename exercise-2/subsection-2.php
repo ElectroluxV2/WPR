@@ -8,7 +8,7 @@ ini_set('display_startup_errors', '1');
 error_reporting(E_ALL);
 
 // https://www.ef.pl/przewodnik-po-angielskim/gramatyka-angielska/narodowosci-w-jezyku-angielskim/
-const nationalities = [
+const NATIONALITIES = [
     'Afghanistan' => 'Afghan',
     'Algeria' => 'Algerian',
     'Angola' => 'Angolan',
@@ -120,9 +120,9 @@ const nationalities = [
 
 function WhatWasMyNationality($country): string {
     if (!is_string($country)) throw new Error('Parameter country must be string type!');
-    if (!array_key_exists($country, nationalities)) throw new Error('Unknown country!');
+    if (!array_key_exists($country, NATIONALITIES)) throw new Error('Unknown country!');
 
-    return nationalities[$country];
+    return NATIONALITIES[$country];
 }
 
 echo WhatWasMyNationality('Poland').'<br>';
