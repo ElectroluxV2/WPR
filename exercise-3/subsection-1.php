@@ -54,6 +54,8 @@ for ($i = 0; $i < rand(1, ARRAY_LENGTH) + 1; $i++) {
     array_push($randomArray, rand(PHP_INT_MIN, PHP_INT_MAX));
 }
 
+highlight_string("<?php\n\$randomArray =\n" . var_export($randomArray, true) . ";\n?>\n");
+
 // https://stackoverflow.com/a/23410780/7132461 php-array-count-or-sizeof
 $nonStaticArrayLength = count($randomArray);
 
