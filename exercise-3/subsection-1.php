@@ -6,7 +6,7 @@ ini_set('display_errors', '1');
 ini_set('display_startup_errors', '1');
 error_reporting(E_ALL);
 
-const ARRAY_LENGTH = 10;
+const ARRAY_MAX_LENGTH = 20;
 
 // TODO: Don't know if without reference php creates unnecessary copy of array
 function GetMaximumValueFor(&$arrayRef, $arrayLength): int {
@@ -50,16 +50,16 @@ function GetMaximumValueForEach(&$arrayRef): int {
 }
 
 $randomArray = [];
-for ($i = 0; $i < rand(1, ARRAY_LENGTH) + 1; $i++) {
+for ($i = 0; $i < rand(1, ARRAY_MAX_LENGTH) + 1; $i++) {
     array_push($randomArray, rand(PHP_INT_MIN, PHP_INT_MAX));
 }
 
 highlight_string("<?php\n\$randomArray =\n" . var_export($randomArray, true) . ";\n?>\n");
 
 // https://stackoverflow.com/a/23410780/7132461 php-array-count-or-sizeof
-$nonStaticArrayLength = count($randomArray);
+$length = count($randomArray);
 
-echo GetMaximumValueFor($randomArray, $nonStaticArrayLength).'<br>';
-echo GetMaximumValueWhile($randomArray, $nonStaticArrayLength).'<br>';
-echo GetMaximumValueDoWhile($randomArray, $nonStaticArrayLength).'<br>';
+echo GetMaximumValueFor($randomArray, $length).'<br>';
+echo GetMaximumValueWhile($randomArray, $length).'<br>';
+echo GetMaximumValueDoWhile($randomArray, $length).'<br>';
 echo GetMaximumValueForEach($randomArray).'<br>';
