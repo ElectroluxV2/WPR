@@ -52,4 +52,23 @@ EOL;
     }
 }
 
-ShowMultiplicationTableBrowser(14);
+function ShowMultiplicationTableTerminal($width) {
+    $max = strlen($width * $width);
+
+
+    for ($x = 1; $x <= $width; $x++) {
+        if ($x > 1) print str_repeat('-', $width * ($max + 1)).PHP_EOL;
+        for ($y = 1; $y <= $width; $y++) {
+            if ($y > 1) print '|';
+            if ($x === 1 && $y === 1) print str_repeat(' ', $max);
+            else printf("%-${max}d", $x * $y);
+        }
+        echo PHP_EOL;
+    }
+}
+
+if (PHP_SAPI === 'cli') {
+    ShowMultiplicationTableTerminal($argc > 1 ? $argv[1]: 14);
+} else {
+    ShowMultiplicationTableBrowser(14);
+}
