@@ -31,6 +31,7 @@ function ShowMultiplicationTableBrowser($width = 12) {
         display: flex;
         justify-content: center;
         align-items: center; 
+        background-color: #222;
     }
     
     body > div:first-of-type {
