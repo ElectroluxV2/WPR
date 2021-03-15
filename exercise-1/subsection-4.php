@@ -35,6 +35,10 @@ function ReadDateFromId($id): string {
     if ($century == '2100') $month = $month - 40;
     if ($century == '2200') $month = $month - 60;
 
+    if (strlen($month) < 2) {
+        $month = '0'.$month;
+    }
+
     $year = $century + substr($id,0,2);
     return $day.'-'.$month.'-'.$year;
 }
