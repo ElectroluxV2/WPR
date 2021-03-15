@@ -156,11 +156,11 @@ if (!isset($_SESSION['gameEnd'])) {
 if (!isset($_SESSION['xMoves'])) {
     $_SESSION['xMoves'] = true;
 }
-$_SESSION['xMoves'] = !$_SESSION['xMoves'];
 
 extract($_GET);
 if (isset($x) && isset($y)) {
     if ($map[$x][$y] == SquareType::Empty && $_SESSION['gameEnd'] == false) {
+        $_SESSION['xMoves'] = !$_SESSION['xMoves'];
         $map[$x][$y] = $_SESSION['xMoves'] ? SquareType::Cross : SquareType::Circle;
     }
 }
