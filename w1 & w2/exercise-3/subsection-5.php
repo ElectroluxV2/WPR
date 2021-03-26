@@ -118,17 +118,17 @@ EOL;
     <h1><a href="?reset">Reset</a></h1>
 
     <map name="board">
-        <area shape="rect" coords="0,0,200,200" alt="Coffee" href="?x=0&y=0">
-        <area shape="rect" coords="200,0,400,200" alt="Coffee" href="?x=0&y=1">
-        <area shape="rect" coords="400,0,600,200" alt="Coffee" href="?x=0&y=2">
+        <area shape="rect" coords="0,0,200,200" alt="tile" href="?x=0&y=0">
+        <area shape="rect" coords="200,0,400,200" alt="tile" href="?x=0&y=1">
+        <area shape="rect" coords="400,0,600,200" alt="tile" href="?x=0&y=2">
 
-        <area shape="rect" coords="0,200,200,400" alt="Coffee" href="?x=1&y=0">
-        <area shape="rect" coords="200,200,400,400" alt="Coffee" href="?x=1&y=1">
-        <area shape="rect" coords="400,200,600,400" alt="Coffee" href="?x=1&y=2">
+        <area shape="rect" coords="0,200,200,400" alt="tile" href="?x=1&y=0">
+        <area shape="rect" coords="200,200,400,400" alt="tile" href="?x=1&y=1">
+        <area shape="rect" coords="400,200,600,400" alt="tile" href="?x=1&y=2">
 
-        <area shape="rect" coords="0,400,200,600" alt="Coffee" href="?x=2&y=0">
-        <area shape="rect" coords="200,400,400,600" alt="Coffee" href="?x=2&y=1">
-        <area shape="rect" coords="400,400,600,600" alt="Coffee" href="?x=2&y=2">
+        <area shape="rect" coords="0,400,200,600" alt="tile" href="?x=2&y=0">
+        <area shape="rect" coords="200,400,400,600" alt="tile" href="?x=2&y=1">
+        <area shape="rect" coords="400,400,600,600" alt="tile" href="?x=2&y=2">
     </map>
 </main>
 EOL;
