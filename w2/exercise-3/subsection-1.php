@@ -123,13 +123,17 @@ const PRICES_PER_ONE_DAY_IN_US_DOLLARS = [
     'Zimbabwe' => 43,
 ];
 
-function PrintCountryOptions() {
+function PrintCountryOptions($selected) {
     foreach (PRICES_PER_ONE_DAY_IN_US_DOLLARS as $key => $item) {
-        echo "<option value=\"$item\">$key</option>";
+        if ($key == $selected) {
+            echo "<option value=\"$key\" selected>$key ($$item)</option>";
+        } else {
+            echo "<option value=\"$key\">$key ($$item)</option>";
+        }
     }
 }
 
-function PrintForm($personCount, $begin, $end, $result) {
+function PrintForm($personCount, $begin, $end, $country, $result) {
     echo <<<EOL
 <form method="post" name="priceCalculator">
     <fieldset>
@@ -143,10 +147,10 @@ function PrintForm($personCount, $begin, $end, $result) {
         <label for="ed">End</label>
         <input type="date" name="end" id="ed" value="${end}" required>
         
-        <label for="price">Country</label>
-        <select required name="price" id="price">
+        <label for="country">Country</label>
+        <select name="country" id="country" required>
 EOL;
-    PrintCountryOptions();
+    PrintCountryOptions($country);
     echo <<<EOL
         </select>
         
@@ -164,7 +168,7 @@ $result = null;
 $personCount = null;
 $begin = null;
 $end = null;
-$price = null;
+$country = null;
 extract($_POST);
 
 // Way how html forms works ensures us that other props will be set too
@@ -178,9 +182,9 @@ if (isset($personCount)) {
         $result = "Number of person must be greater than 0!";
     } else {
         $days = (($dateEndTimeStamp - $dateBeginTimeStamp) / 60 / 60 / 24) + 1; // Timestamp should be in seconds from 1970
-        $result = $personCount * $days * $price . " $";
+        $result = '$'.$personCount * $days * PRICES_PER_ONE_DAY_IN_US_DOLLARS[$country];
     }
 }
 
 
-PrintForm($personCount, $begin, $end, $result);
+PrintForm($personCount, $begin, $end, $country, $result);
