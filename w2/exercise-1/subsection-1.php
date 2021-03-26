@@ -16,17 +16,17 @@ function PrintForm($a, $b, $result) {
     
         <input type="number" name="a" value="${a}" required>
         
-        <input type="radio" name="operator" value="+" id="+" required>
         <label for="+">+</label>
+        <input type="radio" name="operator" value="+" id="+" required>
         
-        <input type="radio" name="operator" value="-" id="-">
         <label for="-">-</label>
+        <input type="radio" name="operator" value="-" id="-">
         
-        <input type="radio" name="operator" value="/" id=":">
         <label for=":">:</label>
+        <input type="radio" name="operator" value="/" id=":">
         
-        <input type="radio" name="operator" value="*" id="*">
         <label for="*">*</label>
+        <input type="radio" name="operator" value="*" id="*">
         
         <input type="number" name="b" value="${b}" required>
     
