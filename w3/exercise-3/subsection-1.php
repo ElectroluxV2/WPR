@@ -1,13 +1,12 @@
 <?php
-// Formularz biura podróży
-// - stwórz plik PHP zawierający dane do obliczeń (tablica krajów; dla każdego kraju
-// określona cena za pobyt 1 osoby przez 1 dzień)
-// - stwórz formularz z możliwością wpisania: zakresu dat, liczby osób, wyboru kraju (z
-// tablicy krajów)
-// - stwórz skrypt, który sprawdzi: czy wypełniono wszystkie pola, czy zakres dat jest
-// prawidłowy (data startu jest wcześniejsza niż data zakończenia)
-// - jeśli dane są prawidłowe, skrypt powinien policzyć cenę pobytu (na podstawie
-// tablicy krajów)
+// Formularz rezerwacji hotelu:
+// stwórz formularz, który będzie pozwalał: podać z listy rozwijanej ilość osób (1-4), których dotyczy rezerwacja,
+// wpisać dane osoby rezerwującej pobytnp. imię, nazwisko, adres, dane karty kredytowej, e-mail, podać datę pobytu,
+// czy godzinę przyjazdu itd. (pamiętając o odpowiedniej walidacji pól - typach), zaznaczyć czy jest potrzeba
+// dostawienia łóżka dla dziecka, z listy wybrać odpowiednie udogodnienia np. klimatyzacja i popielniczka dla palacza
+// (pamiętaj określić które pola są wymagane)
+// stwórz skrypt PHP, który odbierze powyższe dane i w ładny i przejrzysty sposób wyświetli podsumowanie rezerwacji
+// (użyć do wyświetlenia szablonu HTML)
 
 ini_set('display_errors', '1');
 ini_set('display_startup_errors', '1');
@@ -123,44 +122,168 @@ const PRICES_PER_ONE_DAY_IN_US_DOLLARS = [
     'Zimbabwe' => 43,
 ];
 
-function PrintCountryOptions($selected) {
+function PrintForm($data, $result) {
+    echo <<<EOL
+<form method="post" name="priceCalculator">
+    <fieldset>
+    
+        <em>Make Your reservation</em><br>
+    
+        <label for="nop">No. of person</label>
+        <select name="personCount" id="nop" required>
+EOL;
+    for ($i = 1; $i < 5; $i++) {
+        if ($i == $data['personCount']) {
+            echo "<option value=\"$i\" selected>$i</option>";
+        } else {
+            echo "<option value=\"$i\">$i</option>";
+        }
+    }
+    echo <<<EOL
+        </select>
+        
+        <label for="bg">Begin</label>
+        <input type="date" name="begin" id="bg" value="${data["begin"]}" required>
+                
+        <label for="ed">End</label>
+        <input type="date" name="end" id="ed" value="${data["end"]}" required>
+        
+        <label for="country">Country</label>
+        <select name="country" id="country" required>
+EOL;
     foreach (PRICES_PER_ONE_DAY_IN_US_DOLLARS as $key => $item) {
-        if ($key == $selected) {
+        if ($key == $data["country"]) {
             echo "<option value=\"$key\" selected>$key ($$item)</option>";
         } else {
             echo "<option value=\"$key\">$key ($$item)</option>";
         }
     }
-}
-
-function PrintForm($personCount, $begin, $end, $country, $result) {
-    echo <<<EOL
-<form method="post" name="priceCalculator">
-    <fieldset>
-    
-        <label for="nop">No. of person</label>
-        <input type="number" name="personCount" value="${personCount}" id="nop" required>
-        
-        <label for="bg">Begin</label>
-        <input type="date" name="begin" id="bg" value="${begin}" required>
-                
-        <label for="ed">End</label>
-        <input type="date" name="end" id="ed" value="${end}" required>
-        
-        <label for="country">Country</label>
-        <select name="country" id="country" required>
-EOL;
-    PrintCountryOptions($country);
     echo <<<EOL
         </select>
         
+        <hr>
+        <em>Select your needs</em><br>
         
+        <label for="ibc">Include baby carriage</label>
+        EOL;
+
+    if (isset($data["ibc"])) {
+        echo '<input type="checkbox" name="ibc" id="ibc" checked>';
+    } else {
+        echo '<input type="checkbox" name="ibc" id="ibc" >';
+    }
+
+    echo '<label for="iac">Include air conditioning</label>';
+    if (isset($data["iac"])) {
+        echo '<input type="checkbox" name="iac" id="iac" checked>';
+    } else {
+        echo '<input type="checkbox" name="iac" id="iac" >';
+    }
+
+    echo '<label for="iay">Include ashtray</label>';
+    if (isset($data["iay"])) {
+        echo '<input type="checkbox" name="iay" id="iay" checked>';
+    } else {
+        echo '<input type="checkbox" name="iay" id="iay" >';
+    }
+
+    echo <<<EOL
+        <hr>
+        <em>Enter your payment information</em><br>
+        
+        <label for="ccNumber">CC number</label>
+        <input type="number" name="ccNumber" value="${data["ccNumber"]}" id="ccNumber" autocomplete="cc-number" required>
+        
+        <label for="ccExp">CC expiration date</label>
+        <input type="date" name="ccExp" value="${data["ccExp"]}" id="ccExp" autocomplete="cc-exp" required>
+        
+        <label for="ccCsc">CC security number</label>
+        <input type="number" name="ccCsc" value="${data["ccCsc"]}" id="ccCsc" autocomplete="cc-csc" required>
+        
+        <hr>
+        <em>Person No. 1</em><br>
+        
+        <label for="firstName">First name</label>
+        <input type="text" name="firstName" value="${data["firstName"]}" id="firstName" autocomplete="given-name" required>
+        
+        <label for="secondName">Second name</label>
+        <input type="text" name="secondName" value="${data["secondName"]}" id="secondName" autocomplete="family-name" required>
+        
+        <label for="address">Address</label>
+        <input type="text" name="address" value="${data["address"]}" id="address" autocomplete="address-line1" required>
+        
+        <label for="email">Email</label>
+        <input type="email" name="email" value="${data["email"]}" id="email" required>
+        
+        <section class="pc">
+            <hr>
+            <em>Person No. 2</em><br>
+            
+            <label for="firstName2">First name</label>
+            <input type="text" name="firstName2" value="${data["firstName2"]}" id="firstName2" autocomplete="given-name">
+            
+            <label for="secondName2">Second name</label>
+            <input type="text" name="secondName2" value="${data["secondName2"]}" id="secondName2" autocomplete="family-name">
+        </section>
+        
+        <section class="pc">
+            <hr>
+            <em>Person No. 3</em><br>
+            
+            <label for="firstName3">First name</label>
+            <input type="text" name="firstName3" value="${data["firstName3"]}" id="firstName3" autocomplete="given-name">
+            
+            <label for="secondName3">Second name</label>
+            <input type="text" name="secondName3" value="${data["secondName3"]}" id="secondName3" autocomplete="family-name">
+        </section>
+        
+        <section class="pc">
+            <hr>
+            <em>Person No. 4</em><br>
+            
+            <label for="firstName4">First name</label>
+            <input type="text" name="firstName4" value="${data["firstName4"]}" id="firstName4" autocomplete="given-name">
+            
+            <label for="secondName4">Second name</label>
+            <input type="text" name="secondName4" value="${data["secondName4"]}" id="secondName4" autocomplete="family-name">
+        </section>
+        
+        <br>
         <input type="submit" value="Check">
         
         <code>${result}</code>
     
     </fieldset>
 </form>
+EOL;
+}
+
+function PrintScript() {
+    echo <<<EOL
+
+    <script>
+
+    window.onload = () => {
+        const sections = document.getElementsByClassName('pc');
+        const update = pc => {
+           
+            for (let i = 0; i < 3; i++) {
+                sections[i].hidden = i + 1 >= pc;
+            }
+        }
+        
+        const nop = document.getElementById('nop');
+        nop.onchange = e => {
+            update(e.target.value);
+        }
+        
+        update(nop.value);
+    }
+    
+    
+    
+    </script>
+
 EOL;
 }
 
@@ -186,5 +309,23 @@ if (isset($personCount)) {
     }
 }
 
+PrintScript();
 
-PrintForm($personCount, $begin, $end, $country, $result);
+$data = [
+    "ccNumber" => "",
+    "ccExp" => "",
+    "ccCsc" => "",
+    "firstName" => "",
+    "secondName" => "",
+    "address" => "",
+    "email" => "",
+    "firstName2" => "",
+    "secondName2" => "",
+    "firstName3" => "",
+    "secondName3" => "",
+    "firstName4" => "",
+    "secondName4" => ""
+];
+
+$data = array_merge($data, $_REQUEST);
+PrintForm($data, $result);
