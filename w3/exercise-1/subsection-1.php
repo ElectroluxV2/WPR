@@ -1,9 +1,7 @@
 <?php
 // Prosty kalkulator:
-// - stwórz formularz z miejscem na wpisanie 2 liczb oraz wyborem działania
-// (dodawanie, odejmowanie, mnożenie, dzielenie)
-// - stwórz skrypt PHP, który obsłuży dane z formularza (na podstawie wybranego
-// działania policzy i wyświetli wynik w przeglądarce)
+// stwórz formularz z miejscem na wpisanie 2 liczb oraz wyborem działania (dodawanie, odejmowanie, mnożenie, dzielenie)
+// stwórz skrypt PHP, który obsłuży dane z formularza (na podstawie wybranego działania policzy i wyświetli wynik w przeglądarce)
 
 ini_set('display_errors', '1');
 ini_set('display_startup_errors', '1');
