@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-function printForm(string $error = ""): void {
+function printForm(string $message = ""): void {
 echo <<<EOL
 
 <form method="post">
@@ -19,7 +19,7 @@ echo <<<EOL
         <menu>
             <div>
                 <input type="submit" value="Save">
-                <em>${error}</em>
+                <em>${message}</em>
             </div>
             
         </menu>
@@ -91,7 +91,6 @@ if (empty($filename) || empty($content)) {
     die;
 }
 
-
 if (strlen($filename) > 50 || strlen($filename) < 1) {
     printForm("Filename is too short or too long");
     die;
@@ -103,12 +102,16 @@ if (strlen($content) > 1024 || strlen($content) < 1) {
 }
 
 $safeFilename = htmlspecialchars($filename);
-// chmod("texts/$safeFilename.txt", 0766);
-$file = fopen(realpath("texts/$safeFilename.txt"), 'w');
+$fileWithDir = "/var/www/html/w4/exercise-2/texts/$safeFilename.txt";
+
+$file = fopen($fileWithDir, 'a');
 if (!$file) {
-    printForm("Can't create / read file");
+    printForm("Can't create / read file: ".error_get_last()['message']);
     die;
 }
 
+fwrite($file, PHP_EOL.$content);
+fclose($file);
+
 // Everything good
-printForm();
+printForm("saved");
