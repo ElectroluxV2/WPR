@@ -12,7 +12,7 @@ function PrintForm($a, $b, $result) {
 <form method="post" name="calc">
     <fieldset>
     
-        <input type="number" name="a" value="${a}" required>
+        <input type="number" step="0.01" name="a" value="${a}" required>
         
         <label for="+">+</label>
         <input type="radio" name="operator" value="+" id="+" required>
@@ -26,7 +26,7 @@ function PrintForm($a, $b, $result) {
         <label for="*">*</label>
         <input type="radio" name="operator" value="*" id="*">
         
-        <input type="number" name="b" value="${b}" required>
+        <input type="number" step="0.01" name="b" value="${b}" required>
     
         <input type="submit" value="=">
         
