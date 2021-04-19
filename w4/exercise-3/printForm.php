@@ -127,7 +127,7 @@ EOL;
         
         <br>
         <input type="submit" value="Check">
-        <a href="list-reservations.php">Show filled reservations</a>
+        <a href="/w4/exercise-3/list-reservations.php">Show filled reservations</a>
         
         <code>${message}</code>
     
