@@ -1,7 +1,4 @@
 <?php declare(strict_types=1);
-ini_set('display_errors', '1');
-ini_set('display_startup_errors', '1');
-error_reporting(E_ALL);
 
 function printSummary($data): void {
     echo <<<EOL
@@ -57,7 +54,7 @@ EOL;
 
     echo <<<EOL
 <input type="submit" formnovalidate value="Save" disabled/>
-<input type="submit" formnovalidate formaction="fill-rest-data.php" value="Back"/>
+<input type="submit" formnovalidate formaction="fillExtendedData.php" value="Back"/>
 <input type="submit" value="Next" disabled/>
 </fieldset>
 </form>

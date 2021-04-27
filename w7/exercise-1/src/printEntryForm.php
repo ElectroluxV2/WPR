@@ -36,9 +36,9 @@ function printEntryForm($data): void {
 
 <hr/>
 
-<input type="submit" formnovalidate formaction="subsection-1.php" value="Save"/>
+<input type="submit" formnovalidate formaction="index.php" value="Save"/>
 <input type="submit" formnovalidate value="Back" disabled/>
-<input type="submit" formaction="fill-rest-data.php" value="Next"/>
+<input type="submit" formaction="fillExtendedData.php" value="Next"/>
 
 </fieldset>
 

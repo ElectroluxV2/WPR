@@ -27,9 +27,9 @@ EOL;
     }
     echo <<<EOL
 
-<input type="submit" formnovalidate formaction="fill-rest-data.php" value="Save"/>
-<input type="submit" formnovalidate formaction="subsection-1.php" value="Back"/>
-<input type="submit" formaction="print-summary.php" value="Next"/>
+<input type="submit" formnovalidate formaction="fillExtendedData.php" value="Save"/>
+<input type="submit" formnovalidate formaction="index.php" value="Back"/>
+<input type="submit" formaction="printSummary.php" value="Next"/>
 
 </fieldset>
 
