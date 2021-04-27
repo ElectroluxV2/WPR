@@ -3,7 +3,7 @@
 function printExtendedForm($data): void {
     echo <<<EOL
 
-<form action="print-summary.php" method="post">
+<form method="post">
 
 <fieldset>
 
@@ -27,7 +27,9 @@ EOL;
     }
     echo <<<EOL
 
-<input type="submit" value="Next"/>
+<input type="submit" formnovalidate formaction="fill-rest-data.php" value="Save"/>
+<input type="submit" formnovalidate formaction="subsection-1.php" value="Back"/>
+<input type="submit" formaction="print-summary.php" value="Next"/>
 
 </fieldset>
 

@@ -6,6 +6,9 @@ error_reporting(E_ALL);
 function printSummary($data): void {
     echo <<<EOL
 
+<form method="post">
+<fieldset>
+
 <h1>Appointment owner</h1>
 
 <label for="givenName">Given name:</label>
@@ -51,4 +54,13 @@ EOL;
 <hr/>
 EOL;
     }
+
+    echo <<<EOL
+<input type="submit" formnovalidate value="Save" disabled/>
+<input type="submit" formnovalidate formaction="fill-rest-data.php" value="Back"/>
+<input type="submit" value="Next" disabled/>
+</fieldset>
+</form>
+EOL;
+
 }

@@ -3,7 +3,7 @@
 function printEntryForm($data): void {
     echo <<<EOL
 
-<form action="fill-rest-data.php" method="post">
+<form method="post">
 
 <fieldset>
 
@@ -19,7 +19,7 @@ function printEntryForm($data): void {
 <input type="email" name="email" id="email" value="${data["email"]}" required/>
 
 <label for="personCount">Person count:</label>
-<input type="number" name="personCount" id="personCount" value="${data["personCount"]}" required/>
+<input type="number" name="personCount" id="personCount" min="1" value="${data["personCount"]}" required/>
 
 <hr/>
 
@@ -36,7 +36,9 @@ function printEntryForm($data): void {
 
 <hr/>
 
-<input type="submit" value="Next"/>
+<input type="submit" formnovalidate formaction="subsection-1.php" value="Save"/>
+<input type="submit" formnovalidate value="Back" disabled/>
+<input type="submit" formaction="fill-rest-data.php" value="Next"/>
 
 </fieldset>
 
