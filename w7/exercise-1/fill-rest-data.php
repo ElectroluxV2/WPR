@@ -26,10 +26,12 @@ $_SESSION["data"] = filter_var_array($_REQUEST, [
 
 // Default values
 for ($i = 1; $i <= $_SESSION["data"]["personCount"]; $i++) {
-    $_SESSION["data"] += [
-      "givenName${i}" => "",
-      "familyName${i}" => ""
-    ];
+
+    // Do not override
+    if (isset($_SESSION["data"]["givenName${i}"])) continue;
+
+    $_SESSION["data"]["givenName${i}"] = "";
+    $_SESSION["data"]["familyName${i}"] = "";
 }
 
 include_once "printExtendedForm.php";
